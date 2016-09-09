@@ -29,10 +29,8 @@ int main(int, char *[])
     while (window.isOpen())
     {
         handleEvents(window);
-		window.clear();
-		window.draw(game.player.playerSprite);
-		window.display();
-       // render(window, player.playerSprite);
+
+        render(window, game.player.playerSprite);
     }
 
     return 0;

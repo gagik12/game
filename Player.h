@@ -7,4 +7,4 @@ struct Player
 	sf::Sprite playerSprite;
 };
 
-sf::Sprite initializePlayer(sf::Texture & heroTexture);
+void InitializePlayer(Player & player, sf::Texture & textureGame);

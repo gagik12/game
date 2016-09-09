@@ -1,11 +1,9 @@
 #include "Player.h"
 #include <iostream>
 
-sf::Sprite initializePlayer(sf::Texture & heroTexture)
+void InitializePlayer(Player & player, sf::Texture & texturePlayer) 
 {
-	sf::Sprite playerSprite;
-	playerSprite.setTexture(heroTexture);
-	playerSprite.setTextureRect(sf::IntRect(0, 121, 150, 121));
-	playerSprite.setPosition(250, 250);
-	return playerSprite;
+	player.playerSprite.setTexture(texturePlayer);
+	player.playerSprite.setTextureRect(sf::IntRect(0, 121, 150, 121));
+	player.playerSprite.setPosition(250, 250);
 }
