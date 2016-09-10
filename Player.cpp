@@ -6,7 +6,7 @@ void InitializePlayer(Player & player, sf::Texture & texturePlayer)
 	
 	player.playerSpeed = 20;
 	player.playerSprite.setTexture(texturePlayer);
-	player.playerSprite.setTextureRect(sf::IntRect(0, 121, 150, 121));
+	player.playerSprite.setTextureRect(sf::IntRect(150, 121, 150, 121));
 	player.playerSprite.setPosition(250, 250);
 }
 
@@ -52,31 +52,6 @@ void updatePlayer(sf::RenderWindow & window, Player &player, float & time)
 	}
 		break;
 	}
-	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		float distance = sqrt((player.dX)*(player.dX) + (player.dY)*(player.dY));
-		player.currentFrame += playerSpeed * time;
-		if (player.currentFrame > 16)
-		{
-			player.currentFrame -= 16;
-		}
-		player.playerSprite.setTextureRect(sf::IntRect(0, 122 * int(player.currentFrame), 150, 122));
-		if (distance >= 10)
-		{
-			player.playerSprite.move(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
-		}	
-	}
-	else
-	{
-		player.currentFrame += playerSpeed * time;
-		if (player.currentFrame > 20)
-		{
-			player.currentFrame -= 20;
-		}
-		player.playerSprite.setTextureRect(sf::IntRect(150, 122 * int(player.currentFrame), 150, 122));
-
-	}*/
-
 }
 
 bool handlePackmanKeyPress(const sf::Event::KeyEvent &event, Player &player)

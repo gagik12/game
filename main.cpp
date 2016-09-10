@@ -36,7 +36,6 @@ void render(sf::RenderWindow & window, sf::Sprite &playerSprite)
 int main(int, char *[])
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Window Title");
-	//window.setFramerateLimit(60);
 	Game game;
 	InitializeGame(game);
 
@@ -54,6 +53,5 @@ int main(int, char *[])
 			timeSinceLastUpdate -= TIME_PER_FRAME;
 		}
     }
-
     return 0;
 }
