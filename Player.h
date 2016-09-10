@@ -20,6 +20,7 @@ struct Player
 
 	sf::Sprite playerSprite;
 	bool isMove;
+	bool isKilled;
 	float playerSpeed;
 	float currentFrame = 0;
 	Direction direction;
@@ -30,4 +31,4 @@ struct Player
 void InitializePlayer(Player & player, sf::Texture & textureGame);
 void updatePlayer(sf::RenderWindow & window, Player &player, float & time);
 bool handlePackmanKeyPress(const sf::Event::KeyEvent &event, Player &player);
-bool handlePackmanKeyRelease(const sf::Event::KeyEvent &event, Player &player);
+//bool handlePackmanKeyRelease(const sf::Event::KeyEvent &event, Player &player);

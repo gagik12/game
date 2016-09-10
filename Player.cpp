@@ -1,7 +1,7 @@
 ﻿#include "Player.h"
 #include <iostream>
-#include "math.h"
 #include "Config.h"
+
 void InitializePlayer(Player & player, sf::Texture & texturePlayer) 
 {
 	player.isMove = false;
@@ -28,14 +28,14 @@ void updatePlayer(sf::RenderWindow & window, Player &player, float & time)
 	sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
 	sf::Vector2f pos = window.mapPixelToCoords(pixelPos);
 
-	sf::IntRect textureRect = player.playerSprite.getTextureRect();
-
-	player.playerSprite.setOrigin(textureRect.width / 2, textureRect.height / 2);
 	player.dX = pos.x - player.playerSprite.getPosition().x;
 	player.dY = pos.y - player.playerSprite.getPosition().y;
 
+	sf::IntRect textureRect = player.playerSprite.getTextureRect();
+	player.playerSprite.setOrigin(textureRect.width / 2, textureRect.height / 2);
 	float rotation = (atan2(player.dY, player.dX)) * 180 / 3.14159265;
 	player.playerSprite.setRotation(rotation);
+
 	switch (player.direction)
 	{
 	case Direction::UP:
@@ -75,68 +75,50 @@ void updatePlayer(sf::RenderWindow & window, Player &player, float & time)
 	}
 	break;
 	}
+	if (!player.isMove)
+	{
+		player.direction = Direction::NONE;
+	}
 }
 
 bool handlePackmanKeyPress(const sf::Event::KeyEvent &event, Player &player)
 {
 	bool handled = true;
-	switch (event.code)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
 	{
-	case sf::Keyboard::Up:
-		player.direction = Direction::UP;
-		break;
-	case sf::Keyboard::Down:
-		player.direction = Direction::DOWN;
-		break;
-	case sf::Keyboard::Left:
-		player.direction = Direction::LEFT;
-		break;
-	case sf::Keyboard::Right:
-		player.direction = Direction::RIGHT;
-		break;
-
-
-	default:
-		handled = false;
-		break;
+		player.direction = Direction::UP_LEFT;
 	}
-	return handled;
-}
-
-bool handlePackmanKeyRelease(const sf::Event::KeyEvent &event, Player &player)
-{
-	bool handled = true;
-	
-	switch (event.code)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D)) 
 	{
-	case sf::Keyboard::Up:
-		if (player.direction == Direction::UP)
-		{
-			player.direction = Direction::NONE;
-		}
-		break;
-	case sf::Keyboard::Down:
-		if (player.direction == Direction::DOWN)
-		{
-			player.direction = Direction::NONE;
-		}
-		break;
-	case sf::Keyboard::Left:
-		if (player.direction == Direction::LEFT)
-		{
-			player.direction = Direction::NONE;
-		}
-		break;
-	case sf::Keyboard::Right:
-		if (player.direction == Direction::RIGHT)
-		{
-			player.direction = Direction::NONE;
-		}
-		break;
-
-	default:
-		handled = false;
-		break;
+		player.direction = Direction::UP_RIGHT;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
+	{
+		player.direction = Direction::DOWN_LEFT;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && sf::Keyboard::isKeyPressed(sf::Keyboard::D)) 
+	{
+		player.direction = Direction::DOWN_RIGHT;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		player.direction = Direction::UP;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) 
+	{
+		player.direction = Direction::DOWN;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) 
+	{
+		player.direction = Direction::RIGHT;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 
+	{
+		player.direction = Direction::LEFT;
+	}
+	else 
+	{
+		player.direction = Direction::NONE;
 	}
 	return handled;
 }

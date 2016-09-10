@@ -16,11 +16,12 @@ void handleEvents(sf::RenderWindow & window, Player &player)
 		// Клавиши управления пакманом
 		else if (event.type == sf::Event::KeyPressed)
 		{
+			player.isMove = true;
 			handlePackmanKeyPress(event.key, player);
 		}
 		else if (event.type == sf::Event::KeyReleased)
 		{
-			handlePackmanKeyRelease(event.key, player);
+			player.isMove = false;
 		}
 	}
 }
@@ -47,6 +48,7 @@ int main(int, char *[])
 		while (timeSinceLastUpdate > TIME_PER_FRAME)
 		{
 			float time =  timeSinceLastUpdate.asSeconds();
+			std::cout << time << std::endl;
 			handleEvents(window, game.player);
 			updatePlayer(window, game.player, time);
 			render(window, game.player.playerSprite);
