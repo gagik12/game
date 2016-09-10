@@ -40,7 +40,7 @@ void handlePackmanPress(Player &player, float &time)
 			if (player.isShootRun)
 			{
 				sf::Vector2f speed(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
-				MovePlayer(player, time, speed, sf::Vector2f(300, 64), STAND_CURRENT_FRAME, sf::Vector2f(98, 60));
+				MovePlayer(player, time, speed, sf::Vector2f(450, 122), STAND_CURRENT_FRAME, sf::Vector2f(150, 122));
 			}
 			else
 			{
@@ -64,7 +64,7 @@ void handlePackmanPress(Player &player, float &time)
 	{
 		if (player.isShootStand)
 		{
-			MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(398, 64),  STAND_CURRENT_FRAME, sf::Vector2f(98, 60));
+			MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(300, 122),  STAND_CURRENT_FRAME, sf::Vector2f(150, 122));
 		}
 		else
 		{
