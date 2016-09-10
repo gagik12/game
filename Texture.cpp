@@ -2,7 +2,7 @@
 
 void TextureGame::LoadingFromFileTexture() 
 {
-	playerTexture.loadFromFile("images/hero.png");
+	playerTexture.loadFromFile("images/hero4.png");
 
 
 }

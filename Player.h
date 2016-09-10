@@ -21,14 +21,18 @@ struct Player
 	sf::Sprite playerSprite;
 	bool isMove;
 	bool isKilled;
+	bool isShootStand;
+	bool isShootRun;
 	float playerSpeed;
 	float currentFrame = 0;
 	Direction direction;
+	sf::Vector2f playerSpriteSize;
 	float dX = 0;
 	float dY = 0;
 };
 
 void InitializePlayer(Player & player, sf::Texture & textureGame);
+void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame, sf::Vector2f spriteSize);
 void updatePlayer(sf::RenderWindow & window, Player &player, float & time);
 bool handlePackmanKeyPress(const sf::Event::KeyEvent &event, Player &player);
-//bool handlePackmanKeyRelease(const sf::Event::KeyEvent &event, Player &player);
+void handlePackmanPress(Player &player, float &time);

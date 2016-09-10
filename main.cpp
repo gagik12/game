@@ -16,12 +16,35 @@ void handleEvents(sf::RenderWindow & window, Player &player)
 		// Клавиши управления пакманом
 		else if (event.type == sf::Event::KeyPressed)
 		{
+			
+			if (Mouse::isButtonPressed(Mouse::Left)) 
+			{
+				player.isShootRun = true;
+			}
+			else 
+			{
+				player.isShootRun = false;
+			}
 			player.isMove = true;
 			handlePackmanKeyPress(event.key, player);
 		}
 		else if (event.type == sf::Event::KeyReleased)
 		{
 			player.isMove = false;
+		}
+		else if (event.type == Event::MouseButtonPressed)// Стрельба стоя
+		{
+			if (event.key.code == Mouse::Left)
+			{
+				player.isShootStand = true;
+			}
+		}
+		else  if (event.type == Event::MouseButtonReleased)// Стрельба стоя
+		{
+			if (event.key.code == Mouse::Left)
+			{
+				player.isShootStand = false;
+			}
 		}
 	}
 }
@@ -36,7 +59,7 @@ void render(sf::RenderWindow & window, sf::Sprite &playerSprite)
 
 int main(int, char *[])
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Window Title");
+    sf::RenderWindow window(sf::VideoMode(1200, 700), "Window Title");
 	Game game;
 	InitializeGame(game);
 
