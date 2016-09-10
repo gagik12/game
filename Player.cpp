@@ -14,7 +14,7 @@ void InitializePlayer(Player & player, sf::Texture & texturePlayer)
 	player.playerSpriteSize = sf::Vector2f(150, 121);
 }
 
-void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame, sf::Vector2f spriteSize)
+void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame)
 {
 	player.currentFrame += PLAYER_SPEED * time;
 	if (player.currentFrame > currentFrame)
@@ -22,7 +22,7 @@ void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f
 		player.currentFrame -= currentFrame;
 	}
 	
-	player.playerSprite.setTextureRect(sf::IntRect(intRect.x, intRect.y * int(player.currentFrame), spriteSize.x, spriteSize.y));
+	player.playerSprite.setTextureRect(sf::IntRect(intRect.x, intRect.y * int(player.currentFrame), 150, 122));
 	player.playerSprite.move(speed);
 }
 
@@ -40,12 +40,12 @@ void handlePackmanPress(Player &player, float &time)
 			if (player.isShootRun)
 			{
 				sf::Vector2f speed(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
-				MovePlayer(player, time, speed, sf::Vector2f(450, 122), STAND_CURRENT_FRAME, sf::Vector2f(150, 122));
+				MovePlayer(player, time, speed, sf::Vector2f(450, 122), STAND_CURRENT_FRAME);
 			}
 			else
 			{
 				sf::Vector2f speed(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
-				MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME, sf::Vector2f(150, 122));
+				MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 			}
 		}
 	}
@@ -56,7 +56,7 @@ void handlePackmanPress(Player &player, float &time)
 		if (distance >= 10)
 		{
 			sf::Vector2f speed(-playerSpeed * time * 5 * player.dX / distance, -playerSpeed * time * 5 * player.dY / distance);
-			MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME, sf::Vector2f(150, 122));
+			MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 		}
 	}
 	break;
@@ -64,48 +64,48 @@ void handlePackmanPress(Player &player, float &time)
 	{
 		if (player.isShootStand)
 		{
-			MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(300, 122),  STAND_CURRENT_FRAME, sf::Vector2f(150, 122));
+			MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(300, 122),  STAND_CURRENT_FRAME);
 		}
 		else
 		{
-			MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(150, 122), STAND_CURRENT_FRAME, sf::Vector2f(150, 122));
+			MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(150, 122), STAND_CURRENT_FRAME);
 		}
 	}
 		break;
 	case Direction::LEFT:
 	{
 		sf::Vector2f speed(-playerSpeed * time * 5, 0);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME, sf::Vector2f(150, 122));
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 	}
 	break;
 	case Direction::RIGHT:
 	{
 		sf::Vector2f speed(playerSpeed * time * 5, 0);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME, sf::Vector2f(150, 121));
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 	}
 	break;
 	case Direction::UP_LEFT:
 	{
 		sf::Vector2f speed(-playerSpeed * time * 5, -playerSpeed * time * 5);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME, sf::Vector2f(150, 122));
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 	}
 	break;
 	case Direction::UP_RIGHT:
 	{
 		sf::Vector2f speed(playerSpeed * time * 5, -playerSpeed * time * 5);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME, sf::Vector2f(150, 122));
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 	}
 	break;
 	case Direction::DOWN_RIGHT:
 	{
 		sf::Vector2f speed(playerSpeed * time * 5, playerSpeed * time * 5);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME, sf::Vector2f(150, 122));
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 	}
 	break;
 	case Direction::DOWN_LEFT:
 	{
 		sf::Vector2f speed(-playerSpeed * time * 5, playerSpeed * time * 5);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME, sf::Vector2f(150, 122));
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 	}
 	break;
 	}

@@ -34,7 +34,7 @@ struct Player
 };
 
 void InitializePlayer(Player & player, sf::Texture & textureGame);
-void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame, sf::Vector2f spriteSize);
+void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame);
 void updatePlayer(sf::RenderWindow & window, Player &player, float & time);
 bool handlePackmanKeyPress(const sf::Event::KeyEvent &event, Player &player);
 void handlePackmanPress(Player &player, float &time);
