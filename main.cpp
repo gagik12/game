@@ -2,21 +2,27 @@
 #include "game.h"
 #include <iostream>
 const Time TIME_PER_FRAME = seconds(1.f / 60.f);
-void handleEvents(sf::RenderWindow & window)
-{
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
-        {
-            window.close();
-        }
-    }
-}
 
-void update(sf::RenderWindow & window, float &time, Player & player)
+void handleEvents(sf::RenderWindow & window, Player &player)
 {
-	updatePlayer(window, player, time);
+	sf::Event event;
+	while (window.pollEvent(event))
+	{
+		// Кнопка закрытия окна
+		if (event.type == sf::Event::Closed)
+		{
+			window.close();
+		}
+		// Клавиши управления пакманом
+		else if (event.type == sf::Event::KeyPressed)
+		{
+			handlePackmanKeyPress(event.key, player);
+		}
+		else if (event.type == sf::Event::KeyReleased)
+		{
+			handlePackmanKeyRelease(event.key, player);
+		}
+	}
 }
 
 
@@ -42,7 +48,7 @@ int main(int, char *[])
 		while (timeSinceLastUpdate > TIME_PER_FRAME)
 		{
 			float time =  timeSinceLastUpdate.asSeconds();
-			handleEvents(window);
+			handleEvents(window, game.player);
 			updatePlayer(window, game.player, time);
 			render(window, game.player.playerSprite);
 			timeSinceLastUpdate -= TIME_PER_FRAME;
