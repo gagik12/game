@@ -48,7 +48,6 @@ int main(int, char *[])
 		while (timeSinceLastUpdate > TIME_PER_FRAME)
 		{
 			float time =  timeSinceLastUpdate.asSeconds();
-			std::cout << time << std::endl;
 			handleEvents(window, game.player);
 			updatePlayer(window, game.player, time);
 			render(window, game.player.playerSprite);

@@ -22,6 +22,77 @@ void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f
 	player.playerSprite.move(speed);
 }
 
+void handlePackmanPress(Player &player, float &time)
+{
+	float playerSpeed = player.playerSpeed;
+	switch (player.direction)
+	{
+	case Direction::UP:
+	{
+		float distance = sqrt((player.dX)*(player.dX) + (player.dY)*(player.dY));
+		if (distance >= 10)
+		{
+			sf::Vector2f speed(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
+			MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+		}
+	}
+	break;
+	case Direction::DOWN:
+	{
+		float distance = sqrt((player.dX)*(player.dX) + (player.dY)*(player.dY));
+		if (distance >= 10)
+		{
+			sf::Vector2f speed(-playerSpeed * time * 5 * player.dX / distance, -playerSpeed * time * 5 * player.dY / distance);
+			MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+		}
+	}
+	break;
+	case Direction::NONE:
+		MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(150, 122), STAND_CURRENT_FRAME);
+		break;
+	case Direction::LEFT:
+	{
+		sf::Vector2f speed(-playerSpeed * time * 5, 0);
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+	}
+	break;
+	case Direction::RIGHT:
+	{
+		sf::Vector2f speed(playerSpeed * time * 5, 0);
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+	}
+	break;
+	case Direction::UP_LEFT:
+	{
+		sf::Vector2f speed(-playerSpeed * time * 5, -playerSpeed * time * 5);
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+	}
+	break;
+	case Direction::UP_RIGHT:
+	{
+		sf::Vector2f speed(playerSpeed * time * 5, -playerSpeed * time * 5);
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+	}
+	break;
+	case Direction::DOWN_RIGHT:
+	{
+		sf::Vector2f speed(playerSpeed * time * 5, playerSpeed * time * 5);
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+	}
+	break;
+	case Direction::DOWN_LEFT:
+	{
+		sf::Vector2f speed(-playerSpeed * time * 5, playerSpeed * time * 5);
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+	}
+	break;
+	}
+	if (!player.isMove)
+	{
+		player.direction = Direction::NONE;
+	}
+}
+
 void updatePlayer(sf::RenderWindow & window, Player &player, float & time)
 {
 	float playerSpeed = player.playerSpeed;
@@ -35,50 +106,7 @@ void updatePlayer(sf::RenderWindow & window, Player &player, float & time)
 	player.playerSprite.setOrigin(textureRect.width / 2, textureRect.height / 2);
 	float rotation = (atan2(player.dY, player.dX)) * 180 / 3.14159265;
 	player.playerSprite.setRotation(rotation);
-
-	switch (player.direction)
-	{
-	case Direction::UP:
-	{
-		float distance = sqrt((player.dX)*(player.dX) + (player.dY)*(player.dY));
-		if (distance >= 10)
-		{
-			sf::Vector2f speed(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
-			MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
-		}
-	}
-		break;
-	case Direction::NONE:
-	{
-		MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(150, 122), STAND_CURRENT_FRAME);
-	}
-	break;
-
-	case Direction::DOWN:
-	{
-		sf::Vector2f speed(-playerSpeed * time * 5, -playerSpeed * time * 5);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
-	}
-	break;
-
-	case Direction::LEFT:
-	{
-		sf::Vector2f speed(-playerSpeed * time * 5, 0);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
-	}
-	break;
-
-	case Direction::RIGHT:
-	{
-		sf::Vector2f speed(playerSpeed * time * 5, 0);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
-	}
-	break;
-	}
-	if (!player.isMove)
-	{
-		player.direction = Direction::NONE;
-	}
+	handlePackmanPress(player, time);
 }
 
 bool handlePackmanKeyPress(const sf::Event::KeyEvent &event, Player &player)
