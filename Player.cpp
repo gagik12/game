@@ -1,9 +1,9 @@
-#include "Player.h"
+﻿#include "Player.h"
 #include <iostream>
 #include "math.h"
 void InitializePlayer(Player & player, sf::Texture & texturePlayer) 
 {
-	
+	player.isMove = false;
 	player.playerSpeed = 20;
 	player.playerSprite.setTexture(texturePlayer);
 	player.playerSprite.setTextureRect(sf::IntRect(150, 121, 150, 121));
@@ -50,7 +50,45 @@ void updatePlayer(sf::RenderWindow & window, Player &player, float & time)
 		}
 		player.playerSprite.setTextureRect(sf::IntRect(150, 122 * int(player.currentFrame), 150, 122));
 	}
-		break;
+	break;
+
+	case Direction::DOWN:
+	{
+		player.currentFrame += playerSpeed * time;
+		if (player.currentFrame > 16)
+		{
+			player.currentFrame -= 16;
+		}
+		player.playerSprite.setTextureRect(sf::IntRect(0, 122 * int(player.currentFrame), 150, 122));
+		player.playerSprite.move(-playerSpeed * time * 5, -playerSpeed * time * 5);
+	}
+	break;
+
+	case Direction::LEFT:
+	{
+		player.currentFrame += playerSpeed * time;
+		if (player.currentFrame > 16)
+		{
+			player.currentFrame -= 16;
+		}
+		player.playerSprite.setTextureRect(sf::IntRect(0, 122 * int(player.currentFrame), 150, 122));
+		player.playerSprite.move(-playerSpeed * time * 5, 0);
+	}
+	break;
+
+	case Direction::RIGHT:
+	{
+		player.currentFrame += playerSpeed * time;
+		if (player.currentFrame > 16)
+		{
+			player.currentFrame -= 16;
+		}
+		player.playerSprite.setTextureRect(sf::IntRect(0, 122 * int(player.currentFrame), 150, 122));
+		player.playerSprite.move(playerSpeed * time * 5, 0);
+	}
+	break;
+
+
 	}
 }
 
@@ -71,6 +109,8 @@ bool handlePackmanKeyPress(const sf::Event::KeyEvent &event, Player &player)
 	case sf::Keyboard::Right:
 		player.direction = Direction::RIGHT;
 		break;
+
+
 	default:
 		handled = false;
 		break;
@@ -81,6 +121,7 @@ bool handlePackmanKeyPress(const sf::Event::KeyEvent &event, Player &player)
 bool handlePackmanKeyRelease(const sf::Event::KeyEvent &event, Player &player)
 {
 	bool handled = true;
+	
 	switch (event.code)
 	{
 	case sf::Keyboard::Up:
@@ -107,6 +148,7 @@ bool handlePackmanKeyRelease(const sf::Event::KeyEvent &event, Player &player)
 			player.direction = Direction::NONE;
 		}
 		break;
+
 	default:
 		handled = false;
 		break;

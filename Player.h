@@ -8,13 +8,18 @@ enum struct Direction
 	UP,
 	DOWN,
 	LEFT,
-	RIGHT
+	RIGHT,
+	UP_LEFT,
+	UP_RIGHT,
+	DOWN_LEFT,
+	DOWN_RIGHT,
 };
 
 struct Player
 {
 
 	sf::Sprite playerSprite;
+	bool isMove;
 	float playerSpeed;
 	float currentFrame = 0;
 	Direction direction;
