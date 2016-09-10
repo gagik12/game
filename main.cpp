@@ -25,6 +25,7 @@ void handleEvents(sf::RenderWindow & window, Player &player)
 			{
 				player.isShootRun = false;
 			}
+
 			player.isMove = true;
 			handlePackmanKeyPress(event.key, player);
 		}

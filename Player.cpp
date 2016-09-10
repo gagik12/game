@@ -29,16 +29,7 @@ void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f
 void handlePackmanPress(Player &player, float &time)
 {
 	float playerSpeed = player.playerSpeed;
-	if (player.isShootRun)
-	{
-		std::cout << "YES" << std::endl;
-		//MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(398, 64), STAND_CURRENT_FRAME, sf::Vector2f(98, 60));
-	}
-	else
-	{
-		std::cout << "NO" << std::endl;
-		//MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(398, 64), STAND_CURRENT_FRAME, sf::Vector2f(98, 60));
-	}
+
 	switch (player.direction)
 	{
 	case Direction::UP:
@@ -46,8 +37,16 @@ void handlePackmanPress(Player &player, float &time)
 		float distance = sqrt((player.dX)*(player.dX) + (player.dY)*(player.dY));
 		if (distance >= 10)
 		{
-			sf::Vector2f speed(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
-			MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME, sf::Vector2f(150, 122));
+			if (player.isShootRun)
+			{
+				sf::Vector2f speed(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
+				MovePlayer(player, time, speed, sf::Vector2f(300, 64), STAND_CURRENT_FRAME, sf::Vector2f(98, 60));
+			}
+			else
+			{
+				sf::Vector2f speed(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
+				MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME, sf::Vector2f(150, 122));
+			}
 		}
 	}
 	break;

@@ -29,6 +29,8 @@ struct Player
 	sf::Vector2f playerSpriteSize;
 	float dX = 0;
 	float dY = 0;
+
+
 };
 
 void InitializePlayer(Player & player, sf::Texture & textureGame);
