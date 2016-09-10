@@ -1,13 +1,25 @@
 ﻿#include "Player.h"
 #include <iostream>
 #include "math.h"
+#include "Config.h"
 void InitializePlayer(Player & player, sf::Texture & texturePlayer) 
 {
 	player.isMove = false;
-	player.playerSpeed = 20;
+	player.playerSpeed = PLAYER_SPEED;
 	player.playerSprite.setTexture(texturePlayer);
 	player.playerSprite.setTextureRect(sf::IntRect(150, 121, 150, 121));
 	player.playerSprite.setPosition(250, 250);
+}
+
+void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame)
+{
+	player.currentFrame += PLAYER_SPEED * time;
+	if (player.currentFrame > currentFrame)
+	{
+		player.currentFrame -= currentFrame;
+	}
+	player.playerSprite.setTextureRect(sf::IntRect(intRect.x, intRect.y * int(player.currentFrame), 150, 122));
+	player.playerSprite.move(speed);
 }
 
 void updatePlayer(sf::RenderWindow & window, Player &player, float & time)
@@ -29,66 +41,39 @@ void updatePlayer(sf::RenderWindow & window, Player &player, float & time)
 	case Direction::UP:
 	{
 		float distance = sqrt((player.dX)*(player.dX) + (player.dY)*(player.dY));
-		player.currentFrame += playerSpeed * time;
-		if (player.currentFrame > 16)
-		{
-			player.currentFrame -= 16;
-		}
-		player.playerSprite.setTextureRect(sf::IntRect(0, 122 * int(player.currentFrame), 150, 122));
 		if (distance >= 10)
 		{
-			player.playerSprite.move(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
+			sf::Vector2f speed(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
+			MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 		}
 	}
 		break;
 	case Direction::NONE:
 	{
-		player.currentFrame += playerSpeed * time;
-		if (player.currentFrame > 20)
-		{
-			player.currentFrame -= 20;
-		}
-		player.playerSprite.setTextureRect(sf::IntRect(150, 122 * int(player.currentFrame), 150, 122));
+		MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(150, 122), STAND_CURRENT_FRAME);
 	}
 	break;
 
 	case Direction::DOWN:
 	{
-		player.currentFrame += playerSpeed * time;
-		if (player.currentFrame > 16)
-		{
-			player.currentFrame -= 16;
-		}
-		player.playerSprite.setTextureRect(sf::IntRect(0, 122 * int(player.currentFrame), 150, 122));
-		player.playerSprite.move(-playerSpeed * time * 5, -playerSpeed * time * 5);
+		sf::Vector2f speed(-playerSpeed * time * 5, -playerSpeed * time * 5);
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 	}
 	break;
 
 	case Direction::LEFT:
 	{
-		player.currentFrame += playerSpeed * time;
-		if (player.currentFrame > 16)
-		{
-			player.currentFrame -= 16;
-		}
-		player.playerSprite.setTextureRect(sf::IntRect(0, 122 * int(player.currentFrame), 150, 122));
-		player.playerSprite.move(-playerSpeed * time * 5, 0);
+		sf::Vector2f speed(-playerSpeed * time * 5, 0);
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 	}
 	break;
 
 	case Direction::RIGHT:
 	{
-		player.currentFrame += playerSpeed * time;
-		if (player.currentFrame > 16)
-		{
-			player.currentFrame -= 16;
-		}
-		player.playerSprite.setTextureRect(sf::IntRect(0, 122 * int(player.currentFrame), 150, 122));
-		player.playerSprite.move(playerSpeed * time * 5, 0);
+		sf::Vector2f speed(playerSpeed * time * 5, 0);
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 	}
 	break;
-
-
 	}
 }
 
@@ -153,6 +138,5 @@ bool handlePackmanKeyRelease(const sf::Event::KeyEvent &event, Player &player)
 		handled = false;
 		break;
 	}
-
 	return handled;
 }
