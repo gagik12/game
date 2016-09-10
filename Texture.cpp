@@ -2,7 +2,6 @@
 
 void TextureGame::LoadingFromFileTexture() 
 {
-	playerTexture.loadFromFile("images/spritesCOOL.png");
-
-
+	playerTexture.loadFromFile("images/player.png");
+	zombieTexture.loadFromFile("images/zombie.png");
 }
