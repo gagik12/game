@@ -14,10 +14,10 @@ void handleEvents(sf::RenderWindow & window, Player &player)
 			window.close();
 		}
 		// Клавиши управления пакманом
-		else if (event.type == sf::Event::KeyPressed)
+	    if (event.type == sf::Event::KeyPressed)
 		{
 			
-			if (Mouse::isButtonPressed(Mouse::Left)) 
+			if (Mouse::isButtonPressed(Mouse::Left)) // Стрельба при движении 
 			{
 				player.isShootRun = true;
 			}
@@ -27,7 +27,7 @@ void handleEvents(sf::RenderWindow & window, Player &player)
 			}
 
 			player.isMove = true;
-			handlePackmanKeyPress(event.key, player);
+			handlePlayerKeyPress(event.key, player);
 		}
 		else if (event.type == sf::Event::KeyReleased)
 		{
@@ -51,10 +51,11 @@ void handleEvents(sf::RenderWindow & window, Player &player)
 }
 
 
-void render(sf::RenderWindow & window, sf::Sprite &playerSprite)
+void render(sf::RenderWindow & window, Game const& game)
 {
     window.clear();
-    window.draw(playerSprite);
+	window.draw(game.map.spriteMap);
+	window.draw(game.player.playerSprite);
     window.display();
 }
 
@@ -74,7 +75,7 @@ int main(int, char *[])
 			float time =  timeSinceLastUpdate.asSeconds();
 			handleEvents(window, game.player);
 			updatePlayer(window, game.player, time);
-			render(window, game.player.playerSprite);
+			render(window, game);
 			timeSinceLastUpdate -= TIME_PER_FRAME;
 		}
     }

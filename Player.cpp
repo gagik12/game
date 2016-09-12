@@ -1,6 +1,7 @@
 ﻿#include "Player.h"
 #include <iostream>
 #include "Config.h"
+#include <cmath>
 
 void InitializePlayer(Player & player, sf::Texture & texturePlayer) 
 {
@@ -26,7 +27,12 @@ void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f
 	player.playerSprite.move(speed);
 }
 
-void handlePackmanPress(Player &player, float &time)
+void ShootingWhileMoving()
+{
+
+}
+
+void handlePlayerPress(Player &player, float &time)
 {
 	float playerSpeed = player.playerSpeed;
 
@@ -34,8 +40,9 @@ void handlePackmanPress(Player &player, float &time)
 	{
 	case Direction::UP:
 	{
-		float distance = sqrt((player.dX)*(player.dX) + (player.dY)*(player.dY));
-		if (distance >= 10)
+		float distance = hypot(player.dX, player.dY);
+		
+		if (distance != 10)
 		{
 			if (player.isShootRun)
 			{
@@ -52,7 +59,7 @@ void handlePackmanPress(Player &player, float &time)
 	break;
 	case Direction::DOWN:
 	{
-		float distance = sqrt((player.dX)*(player.dX) + (player.dY)*(player.dY));
+		float distance = hypot(player.dX, player.dY);
 		if (distance >= 10)
 		{
 			sf::Vector2f speed(-playerSpeed * time * 5 * player.dX / distance, -playerSpeed * time * 5 * player.dY / distance);
@@ -128,10 +135,10 @@ void updatePlayer(sf::RenderWindow & window, Player &player, float & time)
 	float rotation = (atan2(player.dY, player.dX)) * 180 / 3.14159265;
 	player.playerSprite.setRotation(rotation);
 
-	handlePackmanPress(player, time);
+	handlePlayerPress(player, time);
 }
 
-bool handlePackmanKeyPress(const sf::Event::KeyEvent &event, Player &player)
+bool handlePlayerKeyPress(const sf::Event::KeyEvent &event, Player &player)
 {
 	bool handled = true;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A)) 

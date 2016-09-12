@@ -151,12 +151,14 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>

@@ -7,7 +7,7 @@ using namespace std;
 struct TextureGame
 {
 	Texture playerTexture;
-	Texture zombieTexture;
+	Texture mapTexture;
 
 	void LoadingFromFileTexture();
 };
