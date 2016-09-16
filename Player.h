@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -27,6 +28,7 @@ struct Player
 	float currentFrame = 0;
 	Direction direction;
 	sf::Vector2f playerSpriteSize;
+	sf::Vector2f distanceBetweenMouseAndSprite;
 	float dX = 0;
 	float dY = 0;
 
@@ -36,5 +38,3 @@ struct Player
 void InitializePlayer(Player & player, sf::Texture & textureGame);
 void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame);
 void updatePlayer(sf::RenderWindow & window, Player &player, float & time);
-bool handlePlayerKeyPress(const sf::Event::KeyEvent &event, Player &player);
-void handlePlayerPress(Player &player, float &time);
