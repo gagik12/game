@@ -6,4 +6,4 @@ struct Map
 	sf::Sprite spriteMap;
 };
 
-void InitializeMap(Map & map, sf::Texture & texturePlayer);
+void InitializeMap(Map & map, sf::Texture & textureMap);

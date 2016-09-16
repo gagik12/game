@@ -16,7 +16,7 @@ void InitializePlayer(Player & player, sf::Texture & texturePlayer)
 	player.playerSpriteSize = sf::Vector2f(150, 121);
 }
 
-void ChangeFrame(Player &player, float & time, sf::Vector2f & intRect, int currentFrame)
+void ChangeFrame(Player &player, float & time, sf::Vector2i & intRect, int currentFrame)
 {
 	player.currentFrame += PLAYER_SPEED * time;
 	if (player.currentFrame > currentFrame)
@@ -46,9 +46,9 @@ void updatePlayer(sf::RenderWindow & window, Player &player, float & time)
 	player.dY = pos.y - player.playerSprite.getPosition().y;
 
 	sf::IntRect textureRect = player.playerSprite.getTextureRect();
-	player.playerSprite.setOrigin(textureRect.width / 2, textureRect.height / 2);
-	float rotation = (atan2(player.dY, player.dX)) * 180 / 3.14159265;
-	player.playerSprite.setRotation(rotation);
+	player.playerSprite.setOrigin(textureRect.width / 2.f, textureRect.height / 2.f);
+	double rotation = (atan2(player.dY, player.dX)) * 180 / 3.14159265;
+	player.playerSprite.setRotation(static_cast<float>(rotation));
 
 	handlePlayerPress(player, time);
 }

@@ -1,6 +1,4 @@
 #pragma once
-#pragma once
-
 #include <SFML/Graphics.hpp>
 
 enum struct Direction
