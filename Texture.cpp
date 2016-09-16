@@ -4,4 +4,5 @@ void TextureGame::LoadingFromFileTexture()
 {
 	playerTexture.loadFromFile("images/player.png");
 	mapTexture.loadFromFile("images/textureMap.png");
+	bullet.loadFromFile("images/bullet.gif");
 }

@@ -8,6 +8,7 @@ struct TextureGame
 {
 	Texture playerTexture;
 	Texture mapTexture;
+	Texture bullet;
 
 	void LoadingFromFileTexture();
 };
