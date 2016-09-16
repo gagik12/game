@@ -100,6 +100,18 @@ void DoesNotMove(Player &player, float time)
 	}
 }
 
+void ShootingWithMove(Player &player, float time, sf::Vector2f speed)
+{
+	if (player.isShootRun)
+	{
+		MovePlayer(player, time, speed, sf::Vector2f(450, 122), STAND_CURRENT_FRAME);
+	}
+	else
+	{
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+	}
+}
+
 void handlePlayerPress(Player &player, float &time)
 {
 	float playerSpeed = player.playerSpeed;
@@ -122,37 +134,37 @@ void handlePlayerPress(Player &player, float &time)
 	case Direction::LEFT:
 	{
 		sf::Vector2f speed(-playerSpeed * time * 5, 0);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+		ShootingWithMove(player, time, speed);
 	}
 	break;
 	case Direction::RIGHT:
 	{
 		sf::Vector2f speed(playerSpeed * time * 5, 0);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+		ShootingWithMove(player, time, speed);
 	}
 	break;
 	case Direction::UP_LEFT:
 	{
 		sf::Vector2f speed(-playerSpeed * time * 5, -playerSpeed * time * 5);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+		ShootingWithMove(player, time, speed);
 	}
 	break;
 	case Direction::UP_RIGHT:
 	{
 		sf::Vector2f speed(playerSpeed * time * 5, -playerSpeed * time * 5);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+		ShootingWithMove(player, time, speed);
 	}
 	break;
 	case Direction::DOWN_RIGHT:
 	{
 		sf::Vector2f speed(playerSpeed * time * 5, playerSpeed * time * 5);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+		ShootingWithMove(player, time, speed);
 	}
 	break;
 	case Direction::DOWN_LEFT:
 	{
 		sf::Vector2f speed(-playerSpeed * time * 5, playerSpeed * time * 5);
-		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+		ShootingWithMove(player, time, speed);
 	}
 	break;
 	}
