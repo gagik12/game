@@ -76,17 +76,28 @@ int MoveForward(Player &player, float distance, float time)
 		player.direction = Direction::NONE;
 		return 1;
 	}
+	sf::Vector2f speed(player.playerSpeed * time * 5 * player.dX / distance, player.playerSpeed * time * 5 * player.dY / distance);
 	if (player.isShootRun)
 	{
-		sf::Vector2f speed(player.playerSpeed * time * 5 * player.dX / distance, player.playerSpeed * time * 5 * player.dY / distance);
 		MovePlayer(player, time, speed, sf::Vector2f(450, 122), STAND_CURRENT_FRAME);
 	}
 	else
 	{
-		sf::Vector2f speed(player.playerSpeed * time * 5 * player.dX / distance, player.playerSpeed * time * 5 * player.dY / distance);
 		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 	}
 	return 0;
+}
+
+void DoesNotMove(Player &player, float time)
+{
+	if (player.isShootStand)
+	{
+		MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(300, 122), STAND_CURRENT_FRAME);
+	}
+	else
+	{
+		MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(150, 122), STAND_CURRENT_FRAME);
+	}
 }
 
 void handlePlayerPress(Player &player, float &time)
@@ -106,16 +117,7 @@ void handlePlayerPress(Player &player, float &time)
 	}
 	break;
 	case Direction::NONE:
-	{
-		if (player.isShootStand)
-		{
-			MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(300, 122), STAND_CURRENT_FRAME);
-		}
-		else
-		{
-			MovePlayer(player, time, sf::Vector2f(0, 0), sf::Vector2f(150, 122), STAND_CURRENT_FRAME);
-		}
-	}
+		DoesNotMove(player, time);
 	break;
 	case Direction::LEFT:
 	{
