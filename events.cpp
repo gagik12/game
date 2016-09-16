@@ -27,16 +27,16 @@ void handleEvents(sf::RenderWindow & window, Player &player)
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
-		// Кнопка закрытия окна
+		// РљРЅРѕРїРєР° Р·Р°РєСЂС‹С‚РёСЏ РѕРєРЅР°
 		if (event.type == sf::Event::Closed)
 		{
 			window.close();
 		}
-		// Клавиши управления пакманом
+		// РљР»Р°РІРёС€Рё СѓРїСЂР°РІР»РµРЅРёСЏ РїР°РєРјР°РЅРѕРј
 		if (event.type == sf::Event::KeyPressed)
 		{
 
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) // Стрельба при движении 
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) // РЎС‚СЂРµР»СЊР±Р° РїСЂРё РґРІРёР¶РµРЅРёРё 
 			{
 				player.isShootRun = true;
 			}
@@ -52,14 +52,14 @@ void handleEvents(sf::RenderWindow & window, Player &player)
 		{
 			player.isMove = false;
 		}
-		else if (event.type == sf::Event::MouseButtonPressed)// Стрельба стоя
+		else if (event.type == sf::Event::MouseButtonPressed)// РЎС‚СЂРµР»СЊР±Р° СЃС‚РѕСЏ
 		{
 			if (event.key.code == sf::Mouse::Left)
 			{
 				player.isShootStand = true;
 			}
 		}
-		else  if (event.type == sf::Event::MouseButtonReleased)// Стрельба стоя
+		else  if (event.type == sf::Event::MouseButtonReleased)// РЎС‚СЂРµР»СЊР±Р° СЃС‚РѕСЏ
 		{
 			if (event.key.code == sf::Mouse::Left)
 			{
@@ -69,7 +69,7 @@ void handleEvents(sf::RenderWindow & window, Player &player)
 	}
 }
 
-int MovePlayers(Player &player, float distance, float time)
+int MoveForward(Player &player, float distance, float time)
 {
 	if (distance <= 10)
 	{
@@ -96,7 +96,7 @@ void handlePlayerPress(Player &player, float &time)
 	switch (player.direction)
 	{
 	case Direction::UP:
-		MovePlayers(player, distance, time);
+		MoveForward(player, distance, time);
 	break;
 	case Direction::DOWN:
 	{
