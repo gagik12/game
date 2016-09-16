@@ -16,6 +16,16 @@ void InitializePlayer(Player & player, sf::Texture & texturePlayer)
 	player.playerSpriteSize = sf::Vector2f(150, 121);
 }
 
+void ChangeFrame(Player &player, float & time, sf::Vector2f & intRect, int currentFrame)
+{
+	player.currentFrame += PLAYER_SPEED * time;
+	if (player.currentFrame > currentFrame)
+	{
+		player.currentFrame -= currentFrame;
+	}
+	player.playerSprite.setTextureRect(sf::IntRect(intRect.x, intRect.y * int(player.currentFrame), 150, 122));
+}
+
 void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame)
 {
 	player.currentFrame += PLAYER_SPEED * time;
@@ -23,16 +33,9 @@ void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f
 	{
 		player.currentFrame -= currentFrame;
 	}
-
 	player.playerSprite.setTextureRect(sf::IntRect(intRect.x, intRect.y * int(player.currentFrame), 150, 122));
 	player.playerSprite.move(speed);
 }
-
-void ShootingWhileMoving()
-{
-
-}
-
 
 void updatePlayer(sf::RenderWindow & window, Player &player, float & time)
 {

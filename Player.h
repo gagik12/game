@@ -38,3 +38,4 @@ struct Player
 void InitializePlayer(Player & player, sf::Texture & textureGame);
 void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame);
 void updatePlayer(sf::RenderWindow & window, Player &player, float & time);
+void ChangeFrame(Player &player, float & time, sf::Vector2f & intRect, int currentFrame);

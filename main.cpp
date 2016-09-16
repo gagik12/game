@@ -18,7 +18,7 @@ void render(sf::RenderWindow & window, Game const& game)
 
 int main(int, char *[])
 {
-	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Window Title");
+	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Game");
 	Game game;
 	InitializeGame(game);
 
@@ -33,7 +33,6 @@ int main(int, char *[])
 			handleEvents(window, game.player);
 			updatePlayer(window, game.player, time);
 			GetPlayerCoordinateForView(game.camera.view, game.player.playerSprite.getPosition());
-			//game.camera.view.setCenter(game.player.playerSprite.getPosition());
 			render(window, game);
 			timeSinceLastUpdate -= TIME_PER_FRAME;
 		}

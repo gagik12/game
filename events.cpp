@@ -69,6 +69,25 @@ void handleEvents(sf::RenderWindow & window, Player &player)
 	}
 }
 
+int MovePlayers(Player &player, float distance, float time)
+{
+	if (distance <= 10)
+	{
+		player.direction = Direction::NONE;
+		return 1;
+	}
+	if (player.isShootRun)
+	{
+		sf::Vector2f speed(player.playerSpeed * time * 5 * player.dX / distance, player.playerSpeed * time * 5 * player.dY / distance);
+		MovePlayer(player, time, speed, sf::Vector2f(450, 122), STAND_CURRENT_FRAME);
+	}
+	else
+	{
+		sf::Vector2f speed(player.playerSpeed * time * 5 * player.dX / distance, player.playerSpeed * time * 5 * player.dY / distance);
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
+	}
+	return 0;
+}
 
 void handlePlayerPress(Player &player, float &time)
 {
@@ -76,36 +95,14 @@ void handlePlayerPress(Player &player, float &time)
 	float distance = hypot(player.dX, player.dY);
 	switch (player.direction)
 	{
-
 	case Direction::UP:
-	{
-
-		if (distance <= 10)
-		{
-			player.direction = Direction::NONE;
-			break;
-		}
-		if (player.isShootRun)
-		{
-			sf::Vector2f speed(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
-			MovePlayer(player, time, speed, sf::Vector2f(450, 122), STAND_CURRENT_FRAME);
-		}
-		else
-		{
-			sf::Vector2f speed(playerSpeed * time * 5 * player.dX / distance, playerSpeed * time * 5 * player.dY / distance);
-			MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
-		}	
-	}
+		MovePlayers(player, distance, time);
 	break;
 	case Direction::DOWN:
 	{
-
-		
-			sf::Vector2f playerPos(player.dX, player.dY);
-			sf::Vector2f speed = -playerSpeed * time * 5 * playerPos / distance;
-			//-playerSpeed * time * 5 * player.dY / distance);
-			MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
-		
+		sf::Vector2f playerPos(player.dX, player.dY);
+		sf::Vector2f speed = -playerSpeed * time * 5 * playerPos / distance;
+		MovePlayer(player, time, speed, sf::Vector2f(0, 122), RUN_CURRENT_FRAME);
 	}
 	break;
 	case Direction::NONE:
