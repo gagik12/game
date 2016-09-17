@@ -1,5 +1,6 @@
 #include "map.h"
 using namespace sf;
+
 void InitializeMap(Map & map, sf::Texture & textureMap)
 {
 	textureMap.setRepeated(true);

@@ -153,6 +153,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="events.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="bullet.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="view.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bullet.cpp" />
     <ClCompile Include="events.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />

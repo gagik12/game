@@ -4,26 +4,22 @@
 #include <cmath>
 #include <iostream>
 
-void InitializePlayer(Player & player, sf::Texture & texturePlayer)
+void BulletCreate()
+{
+
+}
+
+void InitializePlayer(Player & player, TextureGame & texture)
 {
 	player.isMove = false;
 	player.isShootStand = false;
 	player.isShootRun = false;
 	player.playerSpeed = PLAYER_SPEED;
-	player.playerSprite.setTexture(texturePlayer);
+	player.bullet = InitializeBullet(texture.bullet);
+	player.playerSprite.setTexture(texture.playerTexture);
 	player.playerSprite.setTextureRect(sf::IntRect(150, 121, 150, 121));
 	player.playerSprite.setPosition(250, 250);
 	player.playerSpriteSize = sf::Vector2f(150, 121);
-}
-
-void ChangeFrame(Player &player, float & time, sf::Vector2i & intRect, int currentFrame)
-{
-	player.currentFrame += PLAYER_SPEED * time;
-	if (player.currentFrame > currentFrame)
-	{
-		player.currentFrame -= currentFrame;
-	}
-	player.playerSprite.setTextureRect(sf::IntRect(intRect.x, intRect.y * int(player.currentFrame), 150, 122));
 }
 
 void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame)

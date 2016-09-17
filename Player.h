@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "bullet.h"
+#include "Texture.h"
 
 enum struct Direction
 {
@@ -24,7 +26,10 @@ struct Player
 	bool isShootRun;
 	float playerSpeed;
 	float currentFrame = 0;
+
 	Direction direction;
+	std::list<Bullet> bullet;
+
 	sf::Vector2f playerSpriteSize;
 	sf::Vector2f distanceBetweenMouseAndSprite;
 	float dX = 0;
@@ -33,7 +38,6 @@ struct Player
 
 };
 
-void InitializePlayer(Player & player, sf::Texture & textureGame);
+void InitializePlayer(Player & player, TextureGame & texture);
 void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame);
 void updatePlayer(sf::RenderWindow & window, Player &player, float & time);
-void ChangeFrame(Player &player, float & time, sf::Vector2f & intRect, int currentFrame);
