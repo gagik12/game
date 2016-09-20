@@ -105,6 +105,7 @@ void ShootingWithMove(Player &player, float time, sf::Vector2f speed)
 	if (player.isShootRun)
 	{
 		MovePlayer(player, time, speed, sf::Vector2f(450, 122), STAND_CURRENT_FRAME);
+		
 	}
 	else
 	{

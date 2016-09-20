@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "bullet.h"
 #include "Texture.h"
+#include <SFML/Audio.hpp>
 
 enum struct Direction
 {
@@ -29,6 +30,7 @@ struct Player
 
 	Direction direction;
 	std::list<Bullet> bullet;
+	Sound shootSound;
 
 	sf::Vector2f playerSpriteSize;
 	sf::Vector2f distanceBetweenMouseAndSprite;
@@ -38,6 +40,6 @@ struct Player
 
 };
 
-void InitializePlayer(Player & player, TextureGame & texture);
+void InitializePlayer(Player & player, TextureGame & texture, Sound & shootSound);
 void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f & intRect, int currentFrame);
 void updatePlayer(sf::RenderWindow & window, Player &player, float & time);

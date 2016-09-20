@@ -4,12 +4,12 @@
 #include <cmath>
 #include <iostream>
 
-void BulletCreate()
+void MoveBullets(Bullet &bullet)
 {
-
+	bullet.spriteBullet.move(10, 10);
 }
 
-void InitializePlayer(Player & player, TextureGame & texture)
+void InitializePlayer(Player & player, TextureGame & texture, Sound & shootSound)
 {
 	player.isMove = false;
 	player.isShootStand = false;
@@ -19,6 +19,7 @@ void InitializePlayer(Player & player, TextureGame & texture)
 	player.playerSprite.setTexture(texture.playerTexture);
 	player.playerSprite.setTextureRect(sf::IntRect(150, 121, 150, 121));
 	player.playerSprite.setPosition(250, 250);
+	player.shootSound = shootSound;
 	player.playerSpriteSize = sf::Vector2f(150, 121);
 }
 
@@ -27,6 +28,10 @@ void MovePlayer(Player &player, float & time, sf::Vector2f & speed, sf::Vector2f
 	player.currentFrame += PLAYER_SPEED * time;
 	if (player.currentFrame > currentFrame)
 	{
+		if (player.isShootStand)
+		{
+			player.shootSound.play();
+		}
 		player.currentFrame -= currentFrame;
 	}
 	player.playerSprite.setTextureRect(sf::IntRect(intRect.x, intRect.y * int(player.currentFrame), 150, 122));

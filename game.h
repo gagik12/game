@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "map.h"
 #include "view.h"
+#include "sound.h"
 
 using namespace sf;
 
@@ -13,6 +14,8 @@ struct Game
 	Player player;
 	Map map;
 	Camera camera;
+	SoundBuff soundBuff;
+	SoundGame soundGame;
 };
 
 void InitializeGame(Game & game);
